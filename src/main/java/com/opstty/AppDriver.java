@@ -1,10 +1,10 @@
 package com.opstty;
 
-import com.opstty.mapper.TreeHeightSortMapper;
-import com.opstty.reducer.TreeHeightSortReducer;
+import com.opstty.mapper.OldestTreeMapper;
+import com.opstty.reducer.OldestTreeReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.FloatWritable;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -18,13 +18,15 @@ public class AppDriver {
         }
 
         Configuration conf = new Configuration();
-        Job job = Job.getInstance(conf, "Tree Height Sort");
+        Job job = Job.getInstance(conf, "Oldest Tree District");
         job.setJarByClass(AppDriver.class);
-        job.setMapperClass(TreeHeightSortMapper.class);
-        job.setReducerClass(TreeHeightSortReducer.class);
+        job.setMapperClass(OldestTreeMapper.class);
+        job.setReducerClass(OldestTreeReducer.class);
 
-        job.setOutputKeyClass(FloatWritable.class);
-        job.setOutputValueClass(Text.class);
+        job.setMapOutputKeyClass(IntWritable.class);
+        job.setMapOutputValueClass(TreeAgeWritable.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
 
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
