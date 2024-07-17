@@ -1,7 +1,7 @@
 package com.opstty;
 
-import com.opstty.mapper.TreeMaxHeightMapper;
-import com.opstty.reducer.TreeMaxHeightReducer;
+import com.opstty.mapper.TreeHeightSortMapper;
+import com.opstty.reducer.TreeHeightSortReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.FloatWritable;
@@ -18,13 +18,13 @@ public class AppDriver {
         }
 
         Configuration conf = new Configuration();
-        Job job = Job.getInstance(conf, "Tree Max Height");
+        Job job = Job.getInstance(conf, "Tree Height Sort");
         job.setJarByClass(AppDriver.class);
-        job.setMapperClass(TreeMaxHeightMapper.class);
-        job.setReducerClass(TreeMaxHeightReducer.class);
+        job.setMapperClass(TreeHeightSortMapper.class);
+        job.setReducerClass(TreeHeightSortReducer.class);
 
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(FloatWritable.class);
+        job.setOutputKeyClass(FloatWritable.class);
+        job.setOutputValueClass(Text.class);
 
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
