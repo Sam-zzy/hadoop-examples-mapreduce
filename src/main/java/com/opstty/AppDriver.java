@@ -1,10 +1,10 @@
 package com.opstty;
 
-import com.opstty.mapper.TreeSpeciesCountMapper;
-import com.opstty.reducer.TreeSpeciesCountReducer;
+import com.opstty.mapper.TreeMaxHeightMapper;
+import com.opstty.reducer.TreeMaxHeightReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -18,13 +18,13 @@ public class AppDriver {
         }
 
         Configuration conf = new Configuration();
-        Job job = Job.getInstance(conf, "Tree Species Count");
+        Job job = Job.getInstance(conf, "Tree Max Height");
         job.setJarByClass(AppDriver.class);
-        job.setMapperClass(TreeSpeciesCountMapper.class);
-        job.setReducerClass(TreeSpeciesCountReducer.class);
+        job.setMapperClass(TreeMaxHeightMapper.class);
+        job.setReducerClass(TreeMaxHeightReducer.class);
 
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(IntWritable.class);
+        job.setOutputValueClass(FloatWritable.class);
 
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
