@@ -12,6 +12,11 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="ODP.REPO" />
+      <option name="name" value="ODP.REPO" />
+      <option name="url" value="https://nexus.luc-data.com/repository/maven-releases/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="hortonworks.public" />
       <option name="name" value="hortonworks.public" />
       <option name="url" value="http://repo.hortonworks.com/content/groups/public/" />
